@@ -4,9 +4,32 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerHorizontal="true" android:layout_alignParentTop="true">
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/photoButtonText"
+                android:onClick="photoButtonClicked"
+                android:id="@+id/photoButton" android:layout_alignParentTop="true" android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/drawButtonText"
+                android:onClick="drawButtonClicked"
+                android:id="@+id/drawButton" android:layout_below="@+id/photoButton" android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="sendButtonClicked"
+                android:text="@string/sendButtonText"
+                android:id="@+id/emailButton" android:layout_below="@+id/drawButton" android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"/>
+    </LinearLayout>
 </RelativeLayout>

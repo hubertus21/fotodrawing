@@ -3,5 +3,11 @@
 
     <string name="app_name">Fotodrawing</string>
     <string name="hello_world">Hello world!</string>
+    <string name="sendButtonText">Wyślij</string>
+    <string name="drawButtonText">Rysuj</string>
+    <string name="photoButtonText">Zrób zdjęcie</string>
+    <string name="title_activity_drawing">Rysowanie</string>
+    <string name="action_settings">Settings</string>
+    <string name="endButtonText">Koniec</string>
 
 </resources>
