@@ -20,7 +20,7 @@ import java.io.IOException;
 public class DrawingActivity extends Activity {
 
     public static final String inputBitmapKey = "DrawingActivityInputBitmap";
-    public static final String outputBitmapKey = "DrawingActivityOutputBitmap";
+    public static final String outputFilenameKey = "DrawingActivityOutputFilename";
 
     private DrawingView drawingView;
     @Override
@@ -57,25 +57,22 @@ public class DrawingActivity extends Activity {
 
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         b.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
-
-//you can create a new file name "test.jpg" in sdcard folder.
+        String filename = Environment.getExternalStorageDirectory()
+                + File.separator + "test.jpg";
         try {
-            File f = new File(Environment.getExternalStorageDirectory()
-                    + File.separator + "test.jpg");
+            File f = new File(filename);
             f.createNewFile();
-//write the bytes in file
+
             FileOutputStream fo = new FileOutputStream(f);
             fo.write(bytes.toByteArray());
 
-// remember close de FileOutput
             fo.close();
         }catch (IOException a){
             a.printStackTrace();
 
         }
         Intent a = new Intent();
-        a.putExtra(outputBitmapKey,Environment.getExternalStorageDirectory()
-                + File.separator + "test.jpg");
+        a.putExtra(outputFilenameKey,filename);
         setResult(RESULT_OK,a);
         finish();
 

@@ -48,14 +48,9 @@ public class MainActivity extends Activity {
     public void sendButtonClicked(View v){
 
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
-// set the type to 'email'
-        emailIntent .setType("vnd.android.cursor.dir/email");
-        //String to[] = {""};
-        //emailIntent .putExtra(Intent.EXTRA_EMAIL, to);
-// the attachment
-        emailIntent .putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + filename));
-// the mail subject
-        //emailIntent .putExtra(Intent.EXTRA_SUBJECT, "Subject");
+        emailIntent.setType("vnd.android.cursor.dir/email");
+        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + filename));
+
         startActivity(Intent.createChooser(emailIntent , "Send email..."));
     }
 
@@ -73,7 +68,7 @@ public class MainActivity extends Activity {
         }else if(requestCode == imageDrawRequest){
             if(resultCode == RESULT_OK){
 
-                filename = data.getStringExtra(DrawingActivity.outputBitmapKey);
+                filename = data.getStringExtra(DrawingActivity.outputFilenameKey);
 
             }else{
                 Toast.makeText(this, "Nie udało się", Toast.LENGTH_LONG).show();

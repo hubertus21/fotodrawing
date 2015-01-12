@@ -2,6 +2,7 @@ package com.example.fotodrawing.app;
 
 import android.content.Context;
 import android.graphics.*;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,10 +35,8 @@ public class DrawingView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         if(bitmapImage != null)
-            //canvas.setBitmap(bitmapImage);
+            this.setBackground(new BitmapDrawable(bitmapImage));
 
-            canvas.drawBitmap(bitmapImage,0,0,paint);
-           // this.draw(new Canvas(bitmapImage));
         canvas.drawPath(path,paint);
         super.onDraw(canvas);
 
@@ -45,8 +44,9 @@ public class DrawingView extends View {
 
     public Bitmap getBitmap(){
         this.buildDrawingCache();
+
         return Bitmap.createBitmap(this.getDrawingCache());
-        //return bitmapImage;
+
     }
 
     @Override
