@@ -21,18 +21,32 @@ public class DrawingView extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
 
+        this.setDrawingCacheEnabled(true);
+
+
 
     }
 
     public void setImage(Bitmap bmp){
-        bitmapImage = bmp;
+        bitmapImage = bmp.copy(bmp.getConfig(),true);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        this.draw(new Canvas(bitmapImage));
+        if(bitmapImage != null)
+            //canvas.setBitmap(bitmapImage);
+
+            canvas.drawBitmap(bitmapImage,0,0,paint);
+           // this.draw(new Canvas(bitmapImage));
         canvas.drawPath(path,paint);
         super.onDraw(canvas);
+
+    }
+
+    public Bitmap getBitmap(){
+        this.buildDrawingCache();
+        return Bitmap.createBitmap(this.getDrawingCache());
+        //return bitmapImage;
     }
 
     @Override
