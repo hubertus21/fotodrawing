@@ -3,13 +3,17 @@ package com.example.fotodrawing.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.File;
 
 public class MainActivity extends Activity {
     static int imageCaptureRequest = 1;
@@ -37,12 +41,22 @@ public class MainActivity extends Activity {
 
         Intent i = new Intent(getApplicationContext(),DrawingActivity.class);
         i.putExtra(DrawingActivity.inputBitmapKey,imageBitmap);
-        startActivityForResult(i,imageDrawRequest);
+        startActivityForResult(i, imageDrawRequest);
 
     }
 
     public void sendButtonClicked(View v){
 
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+// set the type to 'email'
+        emailIntent .setType("vnd.android.cursor.dir/email");
+        //String to[] = {""};
+        //emailIntent .putExtra(Intent.EXTRA_EMAIL, to);
+// the attachment
+        emailIntent .putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + filename));
+// the mail subject
+        //emailIntent .putExtra(Intent.EXTRA_SUBJECT, "Subject");
+        startActivity(Intent.createChooser(emailIntent , "Send email..."));
     }
 
     @Override
@@ -58,7 +72,7 @@ public class MainActivity extends Activity {
             }
         }else if(requestCode == imageDrawRequest){
             if(resultCode == RESULT_OK){
-                
+
                 filename = data.getStringExtra(DrawingActivity.outputBitmapKey);
 
             }else{
